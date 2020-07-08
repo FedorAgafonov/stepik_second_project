@@ -7,7 +7,7 @@
   <div class="text-center mb-5">
     <div class="btn-group mx-auto mb-0" role="group" aria-label="Basic example">
       {% for item in goal %}
-        <a href="goal.html" class="btn btn-outline-secondary">{{ goal[item] }}</a>
+        <a href="{{ url_for('render_goals_page', goal=item) }}" class="btn btn-outline-secondary">{{ goal[item] }}</a>
       {% endfor %}
 
     </div>
@@ -37,7 +37,7 @@
   <h2 class="text-center mt-5 mb-3">Не нашли своего репетитора?</h2>
   <p class="text-center mb-4">Расскажите, кто вам нужен и мы подберем его сами</p>
   <div class="text-center pb-5">
-      <a href="" class="btn btn-primary">Заказать подбор</a>
+      <a href="{{ url_for('render_request_page') }}" class="btn btn-primary">Заказать подбор</a>
   </div>
 </main>
 {% endblock %}
