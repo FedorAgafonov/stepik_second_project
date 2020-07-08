@@ -1,18 +1,9 @@
 import json
 from flask import Flask, render_template
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import InputRequired, Length
+from form import FromBooking, RadioRequest
 
 app = Flask(__name__)
 app.secret_key = "randomstring"
-
-
-class FromBooking(FlaskForm):
-    name = StringField('Вас зовут', [InputRequired(message="Введите что-нибудь")])
-    phone = StringField('Ваш телефон', [Length(min=10, max=10, message="Некорректный номер")])
-    submit = SubmitField('Записаться на пробный урок')
-
 
 week_days = {
     'mon': 'Monday',
@@ -36,7 +27,7 @@ def render_goals_page(goal):
 
 
 @app.route('/profiles/<int:id_teacher>/')
-def render_main_page(id_teacher):
+def render_profiles_page(id_teacher):
     with open('data/teachers.json', 'r') as teach:
         data = json.load(teach)
         for item in data:
@@ -49,14 +40,27 @@ def render_main_page(id_teacher):
     return render_template('profile.html', id_teacher=id_teacher, data_of_teacher=data, free_days=free_days, week=week_days)
 
 
-@app.route('/request/')
+@app.route('/request/', methods=['GET', 'POST'])
 def render_request_page():
-    return render_template('request.html')
+    radio = RadioRequest()
+    name = radio.name.data
+    phone = radio.phone.data
+    phone = phone.replace('-', "")
+    for_what = radio.for_what.data
+    how_time = radio.how_time.data
+    if radio.validate_on_submit():
 
+        with open('data/request.json', 'r') as read_f:
+            data_request = json.load(read_f)
+        data_request.append({'name': name, 'phone': phone, 'for_what': for_what, 'how_time': how_time})
+        with open('data/request.json', 'w') as write_f:
+            contents = json.dumps(data_request, indent=4, ensure_ascii=False)
+            write_f.write(contents)
 
-@app.route('/request_done/')
-def render_request_done():
-    return render_template('request_done.html')
+        return render_template('request_done.html', name=name, phone=phone, for_what=for_what, how_time=how_time)
+    else:
+        print(radio.errors)
+        return render_template('request.html', form=radio)
 
 
 @app.route('/booking/<int:id_teacher>/<w_day>/<time>/')
