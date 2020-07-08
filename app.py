@@ -23,7 +23,16 @@ def render_main():
 
 @app.route('/goals/<goal>/')
 def render_goals_page(goal):
-    return render_template('goal.html')
+    with open('data/teachers.json', 'r') as read_f:
+        teachers = json.load(read_f)
+    with open('data/goals.json', 'r') as read_f:
+        goals = json.load(read_f)
+    necessary_teacher = []
+    for item in teachers:
+        if goal in item['goals']:
+            necessary_teacher.append(item)
+    goal = goals[goal]
+    return render_template('goal.html', teachers=necessary_teacher, goal=goal.lower())
 
 
 @app.route('/profiles/<int:id_teacher>/')
@@ -45,7 +54,6 @@ def render_request_page():
     radio = RadioRequest()
     name = radio.name.data
     phone = radio.phone.data
-    phone = phone.replace('-', "")
     for_what = radio.for_what.data
     how_time = radio.how_time.data
     if radio.validate_on_submit():
