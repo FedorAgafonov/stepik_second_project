@@ -22,7 +22,7 @@ def render_main():
         data = json.load(teach)
     with open('data/goals.json', 'r') as read_f:
         goals = json.load(read_f)
-    return render_template('index.html', four_teach=data, goal=goals)
+    return render_template('index.html', four_teach=data[:6], goal=goals)
 
 
 @app.route('/goals/<goal>/')
