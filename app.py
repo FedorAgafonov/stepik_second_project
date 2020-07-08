@@ -18,7 +18,11 @@ week_days = {
 
 @app.route('/')
 def render_main():
-    return render_template('index.html')
+    with open('data/teachers.json', 'r') as teach:
+        data = json.load(teach)
+    with open('data/goals.json', 'r') as read_f:
+        goals = json.load(read_f)
+    return render_template('index.html', four_teach=data[:4], goal=goals)
 
 
 @app.route('/goals/<goal>/')
