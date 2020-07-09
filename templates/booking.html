@@ -4,7 +4,7 @@
 <main class="container mt-3">
   <div class="row mt-5">
     <div class="col-10 col-md-6 offset-1 offset-md-3 mb-3">
-      <form action="{{ url_for('render_booking_done', day=w_day, time=time) }}" class="card mb-3" method="POST">
+      <form action="{{ url_for('render_booking_page', time=time, id_teacher=data_of_teacher.id, w_day=w_day) }}" class="card mb-3" method="POST">
         <div class="card-body text-center pt-5">
           <img src="../static/pict 1.png" class="mb-3" width="95" alt="">
           <h2 class="h5 card-title mt-2 mb-2">{{ data_of_teacher.name }}</h2>

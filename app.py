@@ -84,40 +84,26 @@ def render_request_page():
         return render_template('request.html', form=radio)
 
 
-
-
-
-
-
-@app.route('/booking/<int:id_teacher>/<w_day>/<time>/')
+@app.route('/booking/<int:id_teacher>/<w_day>/<time>/', methods=['GET', 'POST'])
 def render_booking_page(id_teacher, w_day, time):
-    with open('data/teachers.json', 'r') as teach:
-        data = json.load(teach)
-        for item in data:
-            if item['id'] == id_teacher:
-                data = item
-                break
-    form = FromBooking()
-    return render_template('booking.html', id_teacher=id_teacher, w_day=w_day, time=time, data_of_teacher=data, week=week_days, form=form)
 
+    data = read_json('teachers')
+    for item in data:
+        if item['id'] == id_teacher:
+            data = item
+            break
 
-@app.route('/booking_done/<day>/<int:time>/', methods=['POST'])
-def render_booking_done(day, time):
     form = FromBooking()
     name = form.name.data
     phone = form.phone.data
 
-    data_phone = read_json('booking')
-    data_phone.append({'name': name, 'phone': phone})
-    contents = json.dumps(data_phone, indent=4, ensure_ascii=False)
-    write_json('booking', contents)
-
-    return render_template('booking_done.html', name=name, time=time, day=day, phone=phone, week=week_days)
-
-
-
-
-
+    if form.validate_on_submit():
+        data_phone = read_json('booking')
+        data_phone.append({'name': name, 'phone': phone})
+        contents = json.dumps(data_phone, indent=4, ensure_ascii=False)
+        write_json('booking', contents)
+        return render_template('booking_done.html', name=name, time=time, day=w_day, phone=phone, week=week_days)
+    return render_template('booking.html', id_teacher=id_teacher, w_day=w_day, time=time, data_of_teacher=data, week=week_days, form=form)
 
 
 app.run('0.0.0.0', 8000)
