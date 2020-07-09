@@ -106,4 +106,5 @@ def render_booking_page(id_teacher, w_day, time):
     return render_template('booking.html', id_teacher=id_teacher, w_day=w_day, time=time, data_of_teacher=data, week=week_days, form=form)
 
 
-app.run('0.0.0.0', 8000)
+if __name__ == '__main__':
+    app.run()
