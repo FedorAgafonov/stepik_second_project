@@ -26,7 +26,7 @@
               <h6 class="mt-4">{{ week[key] }}</h6>
                 {% for time, now_time in item.items() %}
                 {% if item[time] == True%}
-                <a href="{{ url_for('render_booking_page', id_teacher=data_of_teacher.id, w_day=key, time=time[:2]) }}" class="btn btn-outline-success m-1">{{ time }} свободно</a>
+                <a href="{{ url_for('render_booking_page', id_teacher=data_of_teacher.id, w_day=key, time=time[: time.find(':')]) }}" class="btn btn-outline-success m-1">{{ time }} свободно</a>
                 {% else %}
                 <a href="#" class="btn btn-outline-secondary disabled m-1">{{ time }} занято</a>
                 {% endif %}
