@@ -22,10 +22,16 @@
           {{ form.csrf_token }}
           {{ form.name.label }}
           {{ form.name(class_="col mb-2") }}
+          {% for err in form.name.errors %}
+            <p class="alert-warning mt-2 pl-2">{{ err }}</p>
+          {% endfor %}
 
           {{ form.csrf_token }}
           {{ form.phone.label }}
           {{ form.phone(class_="col") }}
+          {% for err in form.phone.errors %}
+            <p class="alert-warning mt-2 pl-2">{{ err }}</p>
+          {% endfor %}
 
           {{ form.submit(class_="btn btn-primary btn-block mt-4") }}
 
