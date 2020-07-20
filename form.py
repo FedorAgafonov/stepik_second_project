@@ -5,7 +5,7 @@ from wtforms.validators import InputRequired, Length
 
 class FromBooking(FlaskForm):
     name = StringField('Вас зовут', [InputRequired(message="Введите что-нибудь")])
-    phone = StringField('Ваш телефон', [Length(min=10, max=10, message="Некорректный номер")])
+    phone = StringField('Ваш телефон', [Length(min=10, message="Некорректный номер")])
     submit = SubmitField('Записаться на пробный урок')
 
 

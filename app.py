@@ -112,11 +112,11 @@ class Student(db.Model):
 # models end
 
 goals = {
-    "travel": "Для путешествий",
-    "study": "Для учебы",
-    "work": "Для работы",
-    "relocate": "Для переезда",
-    "program": "Для программирования"
+    "travel": "для путешествий",
+    "study": "для учебы",
+    "work": "для работы",
+    "relocate": "для переезда",
+    "program": "для программирования"
 }
 
 
@@ -140,7 +140,7 @@ def render_goals_page(goal):
         teacher = db.session.query(Teachers).filter(Teachers.work == True).all()
     elif goal == 'program':
         teacher = db.session.query(Teachers).filter(Teachers.program == True).all()
-    return render_template('goal.html', teachers=teacher, goal=goal.lower(), goals=goals)
+    return render_template('goal.html', teachers=teacher, goal=goal, goals=goals)
 
 
 @app.route('/profiles/<int:id_teacher>/')
@@ -177,6 +177,10 @@ def render_booking_page(id_teacher, w_day, time):
     if form.validate_on_submit():
         name.replace(' ', '')
         phone.replace(' ', '')
+        phone.replace('-', '')
+        phone.replace(')', '')
+        phone.replace('(', '')
+        phone.replace('+', '')
         if db.session.query(Student).filter(Student.name == name).all() or db.session.query(Student).filter(Student.phone == phone).all():
             nik = db.session.query(Student.id).filter(Student.name == name).all()
             now_day = db.session.query(Day.id).filter(Day.week_day == w_day).all()
@@ -227,4 +231,4 @@ def render_request_page():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run('0.0.0.0', 8000)
