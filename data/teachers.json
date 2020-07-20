@@ -6,6 +6,7 @@
         "rating": 4.2,
         "picture": "https://i.pravatar.cc/300?img=20",
         "price": 900,
+        "gender": false,
         "goals": [
             "travel",
             "relocate",
@@ -91,6 +92,7 @@
         "rating": 4.8,
         "picture": "https://i.pravatar.cc/300?img=19",
         "price": 1200,
+        "gender": false,
         "goals": [
             "relocate",
             "study"
@@ -175,6 +177,7 @@
         "picture": "https://i.pravatar.cc/300?img=27",
         "rating": 4.7,
         "price": 1300,
+        "gender": false,
         "goals": [
             "work"
         ],
@@ -258,6 +261,7 @@
         "picture": "https://i.pravatar.cc/300?img=28",
         "rating": 4.9,
         "price": 1300,
+        "gender": false,
         "goals": [
             "travel",
             "study"
@@ -342,6 +346,7 @@
         "picture": "https://i.pravatar.cc/300?img=29",
         "rating": 4.3,
         "price": 900,
+        "gender": false,
         "goals": [
             "travel"
         ],
@@ -425,6 +430,7 @@
         "picture": "https://i.pravatar.cc/300?img=30",
         "rating": 3.9,
         "price": 800,
+        "gender": false,
         "goals": [
             "travel",
             "study"
@@ -509,6 +515,7 @@
         "picture": "https://i.pravatar.cc/300?img=32",
         "rating": 4.5,
         "price": 1200,
+        "gender": false,
         "goals": [
             "travel",
             "relocate",
@@ -594,6 +601,7 @@
         "picture": "https://i.pravatar.cc/300?img=33",
         "rating": 4.5,
         "price": 1100,
+        "gender": true,
         "goals": [
             "study"
         ],
@@ -677,6 +685,7 @@
         "picture": "https://i.pravatar.cc/300?img=35",
         "rating": 5,
         "price": 1700,
+        "gender": false,
         "goals": [
             "relocate",
             "work",
@@ -762,6 +771,7 @@
         "picture": "https://i.pravatar.cc/300?img=36",
         "rating": 4.1,
         "price": 1200,
+        "gender": false,
         "goals": [
             "work",
             "program"
@@ -846,6 +856,7 @@
         "picture": "https://i.pravatar.cc/300?img=37",
         "rating": 4.7,
         "price": 1100,
+        "gender": false,
         "goals": [
             "travel",
             "study",
@@ -932,6 +943,7 @@
         "picture": "https://i.pravatar.cc/300?img=38",
         "rating": 4.2,
         "price": 900,
+        "gender": false,
         "goals": [
             "travel",
             "work",

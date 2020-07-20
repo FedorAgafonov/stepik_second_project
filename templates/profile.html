@@ -6,33 +6,31 @@
     <div class="card-body m-2 m-md-4">
       <article class="">
         <div class="row">
-            <div class="col-4"><img src="{{ data_of_teacher.picture }}" class="img-fluid" alt=""></div>
+            <div class="col-4"><img src="{{ picture }}" class="img-fluid" alt=""></div>
               <section class="col-8 teacher=info">
-                <h1 class="h2">{{ data_of_teacher.name }}</h1>
+                <h1 class="h2">{{ name }}</h1>
                 <p>
-                    {% for item in data_of_teacher.goals %}
-                    <span class="badge badge-secondary mr-2">{{ item }}</span>
-                    {% endfor %}
-                    Рейтинг: {{ data_of_teacher.rating }} Ставка: {{ data_of_teacher.price }} / час
+                    Рейтинг: {{ rating }} Ставка: {{ price }} / час
                 </p>
-                <p>{{ data_of_teacher.about }}</p>
+                <p>{{ about }}</p>
               </section>
         </div>
         <section class="available text-center">
           <h4 class="mb-4 mt-5">Записаться на пробный урок</h4>
           <div class="row">
-            {% for key, item in free_days.items() %}
+            {% for week_day in day %}
             <div class="col">
-              <h6 class="mt-4">{{ week[key] }}</h6>
-                {% for time, now_time in item.items() %}
-                {% if item[time] == True%}
-                <a href="{{ url_for('render_booking_page', id_teacher=data_of_teacher.id, w_day=key, time=time[: time.find(':')]) }}" class="btn btn-outline-success m-1">{{ time }} свободно</a>
-                {% else %}
-                <a href="#" class="btn btn-outline-secondary disabled m-1">{{ time }} занято</a>
-                {% endif %}
-                {% endfor %}
+              <h6 class="mt-4">{{ week_day }}</h6>
+                {% for now in time %}
+                  {% if (week_day, now) in allready %}
+                    <a href="" class="btn btn-outline-secondary m-1 disabled">{{ now }} занято</a>
+                  {% else %}
+                    <a href="{{ url_for('render_booking_page', id_teacher=id_teacher, time=now, w_day=week_day) }}" class="btn btn-outline-success m-1">{{ now }} свободно</a>
+                  {% endif %}
+              {% endfor %}
             </div>
             {% endfor %}
+
           </div>
         </section>
       </article>

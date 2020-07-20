@@ -3,9 +3,16 @@
 {% block container %}
 <main class="container mt-3">
   <h1 class="h1 text-center w-50 mx-auto mt-1 py-5 mb-4"><strong>Преподаватели <br> {{ goal }}</strong></h1>
+  <div class="text-center mb-5">
+    <div class="btn-group mx-auto mb-0" role="group" aria-label="Basic example">
+      {% for item in goals %}
+        <a href="{{ url_for('render_goals_page', goal=item) }}" class="btn btn-outline-secondary">{{ goals[item] }}</a>
+      {% endfor %}
+    </div>
+  </div>
   <div class="row">
     <div class="col-12 col-lg-10 offset-lg-1 m-auto">
-    {% for teach in teachers|sort(attribute="rating", reverse=True) %}
+    {% for teach in teachers %}
       <div class="card mb-4">
         <div class="card-body">
           <div class="row">

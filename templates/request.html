@@ -12,32 +12,28 @@
       <div class="card-body mx-3">
         <div class="row">
             <div class="col">
+            {{ form.csrf_token }}
             {{ form.for_what.label }}
             {{ form.for_what }}
             </div>
             <div class="col">
+            {{ form.csrf_token }}
             {{ form.how_time.label }}
             {{ form.how_time }}
             </div>
         </div>
-
+        <div class="row">
+            <div class="col">
+                {{ form.gender.label }}
+            </div>
+            <div class="col">
+                {{ form.gender }}
+            </div>
+        </div>
       </div>
       <hr>
       <div class="card-body mx-3">
-
-        {{ form.csrf_token }}
-        {{ form.name.label }}
-        {{ form.name(class_="col mb-2") }}
-
-        {{ form.csrf_token }}
-        {{ form.phone.label }}
-        {{ form.phone(class_="col") }}
-        {% for err in form.phone.errors %}
-          <p class="alert-warning mt-2 pl-2">{{ err }}</p>
-        {% endfor %}
-
         {{ form.submit(class_="btn btn-primary btn-block mt-4") }}
-
       </div>
     </form>
   </div>
