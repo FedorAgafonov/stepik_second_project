@@ -80,13 +80,13 @@ class Student(db.Model):
     book = db.relationship("Booking")
 
 
-teacher = db.Teachers.query.all()
+teacher = db.session.query(Teachers).all()
 db.session.delete(teacher)
 
-time = db.Times.query.all()
+time = db.session.query(Times).all()
 db.session.delete(time)
 
-day = db.Day.query.all()
+day = db.session.query(Day).all()
 db.session.delete(day)
 
 # with open('data/teachers.json', 'r') as teach:
