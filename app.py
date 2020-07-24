@@ -88,7 +88,7 @@ db.session.delete(time)
 
 day = db.session.query(Day).all()
 db.session.delete(day)
-
+db.session.commit()
 # with open('data/teachers.json', 'r') as teach:
 #     get_data = json.load(teach)
 #
