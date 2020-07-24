@@ -90,9 +90,9 @@ class Student(db.Model):
 # db.session.delete(day)
 # db.session.commit()
 
-# with open('data/teachers.json', 'r') as teach:
-#     get_data = json.load(teach)
-#
+with open('data/teachers.json', 'r') as teach:
+    get_data = json.load(teach)
+
 for item in get_data:
     travel = 'travel' in get_data[item['id']]['goals']
     relocate = 'relocate' in get_data[item['id']]['goals']
