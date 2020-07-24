@@ -80,9 +80,9 @@ class Student(db.Model):
     book = db.relationship("Booking")
 
 
-db.session.query(Teachers).filter_by(Teachers.id > 12).delete()
-db.session.query(Times).filter_by(Teachers.id > 8).delete()
-db.session.query(Day).filter_by(Teachers.id > 7).delete()
+db.session.query(Teachers).filter_by(id > 12).delete()
+db.session.query(Times).filter_by(id > 8).delete()
+db.session.query(Day).filter_by(id > 7).delete()
 db.session.commit()
 #
 # if len(db.session.query(Teachers).all()) == 0:
