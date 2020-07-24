@@ -85,7 +85,7 @@ class Student(db.Model):
 # db.session.query(Day).delete()
 # db.session.commit()
 
-if len(db.session.query().all()) == 0:
+if len(db.session.query(Teachers).all()) == 0:
     with open('data/teachers.json', 'r') as teach:
         get_data = json.load(teach)
 
