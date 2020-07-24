@@ -1,10 +1,7 @@
 import json
 from app import Teachers, Day, Times, db
 
-db.session.query(Teachers).filter_by().delete()
-db.session.query(Times).filter_by().delete()
-db.session.query(Day).filter_by().delete()
-db.session.commit()
+
 
 # with open('data/teachers.json', 'r') as teach:
 #     get_data = json.load(teach)
