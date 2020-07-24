@@ -106,10 +106,10 @@ class Student(db.Model):
 # db.session.commit()
 
 
-db.session.query(Teachers).filter_by(Teachers.id > 12).delete()
-db.session.query(Times).filter_by(Times.id > 8).delete()
-db.session.query(Day).filter_by(Day.id > 7).delete()
-db.session.commit()
+# db.session.query(Teachers).filter_by(Teachers.id > 12).delete()
+# db.session.query(Times).filter_by(Times.id > 8).delete()
+# db.session.query(Day).filter_by(Day.id > 7).delete()
+# db.session.commit()
 
 
 # get end
