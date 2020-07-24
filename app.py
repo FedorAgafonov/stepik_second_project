@@ -221,6 +221,8 @@ def render_request_page():
             teacher = db.session.query(Teachers).filter(db.and_(Teachers.work == True, Teachers.gender == gender)).all()
         elif for_what == 'program':
             teacher = db.session.query(Teachers).filter(db.and_(Teachers.program == True, Teachers.gender == gender)).all()
+        elif for_what == 'relocate':
+            teacher = db.session.query(Teachers).filter(db.and_(Teachers.relocate == True, Teachers.gender == gender)).all()
         if len(teacher) == 0:
             text = 'Мы не нашли преподавателя по вашему запросу. Попробуйте позже.'
             return render_template('request_done.html', text=text)
