@@ -80,7 +80,7 @@ class Student(db.Model):
     book = db.relationship("Booking")
 
 
-db.session.query(Teachers).delete()
+db.session.query(Booking).delete()
 db.session.query(Times).delete()
 db.session.query(Day).delete()
 db.session.commit()
