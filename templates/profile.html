@@ -25,7 +25,7 @@
                   {% if (week_day, now) in allready %}
                     <a href="" class="btn btn-outline-secondary m-1 disabled">{{ now }} занято</a>
                   {% else %}
-                    <a href="{{ url_for('render_booking_page', id_teacher=id_teacher, time=now, w_day=week_day) }}" class="btn btn-outline-success m-1">{{ now }} свободно</a>
+                    <a href="{{ url_for('render_booking_page', id_teacher=id_teacher, time=now, w_day=w_day) }}" class="btn btn-outline-success m-1">{{ now }} свободно</a>
                   {% endif %}
               {% endfor %}
             </div>
