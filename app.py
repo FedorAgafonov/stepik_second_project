@@ -159,8 +159,6 @@ def render_booking_page(id_teacher, w_day, time):
             now_day = db.session.query(Day.id).filter(Day.week_day == w_day).first()[0]
             now_time = db.session.query(Time.id).filter(Time.time == time).first()[0]
 
-            print(nik, now_day, now_time)
-
             booking = Booking(teacher_id=id_teacher, student_id=nik, day_id=now_day, time_id=now_time)
             db.session.add(booking)
             db.session.commit()
@@ -188,7 +186,6 @@ def render_request_page():
     gender = radio.gender.data
     teacher_gender = gender == 'True'
     teacher_for_filter = db.session.query(Teacher).join(GoalTeacher).join(Goal).filter(db.and_(GoalTeacher.goal_id == for_what, Teacher.gender == teacher_gender)).all()
-    print(teacher_for_filter)
     if radio.validate_on_submit():
         if len(teacher_for_filter) == 0:
             text = 'Мы не нашли преподавателя по вашему запросу. Попробуйте позже.'
