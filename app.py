@@ -95,7 +95,7 @@ class Student(db.Model):
 @app.route('/')
 def render_main():
 
-    teacher = db.session.query(Teacher).limit(6)
+    teacher = db.session.query(Teacher).order_by(Teacher.rating.desc()).limit(6)
     get_goals = db.session.query(Goal.name).all()
 
     clear_goals = []
@@ -116,7 +116,7 @@ def render_goals_page(goal):
 
     get_goal_id = db.session.query(Goal.id).filter(Goal.name == goal).first()[0]
 
-    teacher_for_goals = db.session.query(Teacher).join(GoalTeacher).join(Goal).filter(GoalTeacher.goal_id == get_goal_id).all()
+    teacher_for_goals = db.session.query(Teacher).join(GoalTeacher).join(Goal).order_by(Teacher.rating.desc()).filter(GoalTeacher.goal_id == get_goal_id).all()
 
     return render_template('goal.html', teachers=teacher_for_goals, goals=clear_goals)
 
@@ -129,18 +129,25 @@ def render_profiles_page(id_teacher):
     times = db.session.query(Time.time).all()
 
     booking = db.session.query(Booking.teacher_id, Day.week_day, Time.time).join(Teacher).join(Time).join(Day).filter(Teacher.id == id_teacher).all()
-    allready = []
+    teacher_goals = db.session.query(Goal.name).join(GoalTeacher).filter(GoalTeacher.teacher_id == id_teacher).all()
+
+    clear_teacher_goals = []
+    for now_goal in teacher_goals:
+        clear_teacher_goals.append(now_goal[0])
+
+    all_ready = []
     for booking in booking:
-        allready.append((booking[1], booking[2]))
+        all_ready.append((booking[1], booking[2]))
 
     time = []
     for now_time in times:
         time.append(now_time[0])
+
     day = []
     for now_day in days:
         day.append(now_day[0])
 
-    return render_template('profile.html', allready=allready, name=teacher.name, about=teacher.about, rating=teacher.rating, price=teacher.price, picture=teacher.picture, day=day, id_teacher=id_teacher, time=time)
+    return render_template('profile.html', allready=all_ready, goals=clear_teacher_goals, name=teacher.name, about=teacher.about, rating=teacher.rating, price=teacher.price, picture=teacher.picture, day=day, id_teacher=id_teacher, time=time)
 
 
 @app.route('/booking/<int:id_teacher>/<w_day>/<time>/', methods=['GET', 'POST'])
@@ -185,7 +192,7 @@ def render_request_page():
     for_what = int(radio.for_what.data)
     gender = radio.gender.data
     teacher_gender = gender == 'True'
-    teacher_for_filter = db.session.query(Teacher).join(GoalTeacher).join(Goal).filter(db.and_(GoalTeacher.goal_id == for_what, Teacher.gender == teacher_gender)).all()
+    teacher_for_filter = db.session.query(Teacher).join(GoalTeacher).join(Goal).order_by(Teacher.rating.desc()).filter(db.and_(GoalTeacher.goal_id == for_what, Teacher.gender == teacher_gender)).all()
     if radio.validate_on_submit():
         if len(teacher_for_filter) == 0:
             text = 'Мы не нашли преподавателя по вашему запросу. Попробуйте позже.'
